@@ -2,6 +2,8 @@ package myPackage;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class main {
 
@@ -13,21 +15,11 @@ public class main {
 		//execute-query
 		//close
 		
+		student st = new student();
 		
-		try {
-			
-			String url = "jdbc:mysql://localhost:3306/jdbc";
-			String userName = "root";
-			String password = "";
-			Class.forName("com.mysql.cj.jdbc.Driver");
-
-			Connection conn = DriverManager.getConnection(url,userName,password);
-			System.out.println("connected");
-			
-		}catch(Exception e) {
-			  e.printStackTrace();
-		}
+		st.createDatabase();
 		
+		st.createStudent();
 	}
 
 }
