@@ -2,6 +2,7 @@ package myPackage;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
@@ -63,6 +64,42 @@ public class student {
 	        
 	        // Execute the create table statement
 	        stm.executeUpdate(createTableQuery);
+
+	        System.out.println("Table 'your_table_name' created successfully.");
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
+	
+	
+	public void insertStudent(String name,String email, double number,int roll ) {
+	    try {
+	        String url = "jdbc:mysql://localhost:3306/java_jdbc";
+	        String userName = "root";
+	        String password = "";
+	        Class.forName("com.mysql.cj.jdbc.Driver");
+
+	        Connection conn = DriverManager.getConnection(url, userName, password);
+	        Statement stm = conn.createStatement();
+	        
+	        // Query to create table
+	        String insertQuery = "INSERT INTO `student` (name, email, phone, roll, is_active) "
+	                + "VALUES (?, ?, ?, ?, ?)";
+
+	        // Prepare the statement
+	        PreparedStatement pstmt = conn.prepareStatement(insertQuery);
+	        
+
+	        pstmt.setString(1, name);
+	        pstmt.setString(2, email);
+	        pstmt.setDouble(3, number);  // Assuming 'number' is the 'phone' field (you might need to clarify its usage)
+	        pstmt.setInt(4, roll);
+	        pstmt.setBoolean(5, true);  // Assuming 'is_active' is a boolean value and you want to set it to true
+	        
+	     
+	        int result = pstmt.executeUpdate();
+	        
 
 	        System.out.println("Table 'your_table_name' created successfully.");
 

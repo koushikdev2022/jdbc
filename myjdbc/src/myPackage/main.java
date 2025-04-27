@@ -20,6 +20,7 @@ public class main {
 		st.createDatabase();
 		
 		st.createStudent();
+		st.insertStudent("koushik","koushik.srist.mondal@gmail.com",8820909295L,15);
 	}
 
 }
