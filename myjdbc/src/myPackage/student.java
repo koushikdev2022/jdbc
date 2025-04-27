@@ -107,6 +107,60 @@ public class student {
 	        e.printStackTrace();
 	    }
 	}
+	
+	
+	public void showStudent(int id ) {
+		try {
+	        String url = "jdbc:mysql://localhost:3306/java_jdbc";
+	        String userName = "root";
+	        String password = "";
+	        Class.forName("com.mysql.cj.jdbc.Driver");
+
+	        Connection conn = DriverManager.getConnection(url, userName, password);
+	        Statement stm = conn.createStatement();
+	        
+	        // Query to create table
+	        String showQuery = "SELECT * FROM `student` WHERE id = ?";
+
+	        // Prepare the statement
+	        PreparedStatement pstmt = conn.prepareStatement(showQuery);
+	        
+
+	       
+	        pstmt.setInt(1,id);
+	       
+	        
+	     
+	        ResultSet rs = pstmt.executeQuery();
+	        
+	        // Process the result set
+	        if (rs.next()) {
+	            // Assuming the columns are 'id', 'name', 'email', 'phone', 'roll', 'is_active'
+	            int studentId = rs.getInt("id");
+	            String name = rs.getString("name");
+	            String email = rs.getString("email");
+	            String phone = rs.getString("phone");
+	            int roll = rs.getInt("roll");
+	            boolean isActive = rs.getBoolean("is_active");
+	            
+	            // Print the student details
+	            System.out.println("Student ID: " + studentId);
+	            System.out.println("Name: " + name);
+	            System.out.println("Email: " + email);
+	            System.out.println("Phone: " + phone);
+	            System.out.println("Roll: " + roll);
+	            System.out.println("Active: " + isActive);
+	        } else {
+	            System.out.println("No student found with id: " + id);
+	        }
+	        
+
+	        System.out.println("Table 'your_table_name' created successfully.");
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
 
 	
 }

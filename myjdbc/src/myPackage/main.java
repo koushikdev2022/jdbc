@@ -21,6 +21,7 @@ public class main {
 		
 		st.createStudent();
 		st.insertStudent("koushik","koushik.srist.mondal@gmail.com",8820909295L,15);
+		st.showStudent(1);
 	}
 
 }
